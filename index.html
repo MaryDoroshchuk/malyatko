@@ -482,6 +482,7 @@
     text-align: center;
     box-shadow: 0 4px 20px rgba(0,0,0,0.06);
     transition: transform 0.2s;
+    overflow: hidden;
   }
   .staff-card:hover { transform: translateY(-4px); }
   .staff-avatar {
@@ -494,6 +495,7 @@
     justify-content: center;
     font-size: 2rem;
     overflow: hidden;
+    transition: transform 0.3s ease;
   }
   .av1 { background: #FFF0E0; }
   .av2 { background: #E0F5FF; }
@@ -607,6 +609,9 @@
     #zasady { padding: 3rem 1rem; }
     #kolektyv { padding: 3rem 1rem; }
   }
+ .staff-card:hover .staff-avatar {
+    transform: scale(1.15);
+}
 </style>
 </head>
 <body>
