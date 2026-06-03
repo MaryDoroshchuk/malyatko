@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ЗДО "Малятко" — Дмитрівка</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sun: #FFB800;
+    --sky: #4BBDE8;
+    --grass: #5DBB63;
+    --warm: #FF7043;
+    --cream: #FFF8EE;
+    --soft: #FFF3E0;
+    --text: #2D2D2D;
+    --muted: #6B6B6B;
+    --white: #FFFFFF;
+    --card-r: 20px;
+    --section-r: 32px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .nav-logo .sun-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--sun);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 0 0 4px rgba(255,184,0,0.2);
+    flex-shrink: 0;
+  }
+
+  .nav-logo span {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 6px 14px;
+    border-radius: 100px;
+    transition: all 0.2s;
+  }
+
+  .nav-links a:hover {
+    color: var(--text);
+    background: var(--soft);
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 3rem 2rem 6rem;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, #FFF8EE 0%, #E8F5FF 55%, #EAFBEA 100%);
+    z-index: 0;
+  }
+
+  .hero-shapes {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.25;
+  }
+
+  .s1 { width: 500px; height: 500px; background: var(--sun); top: -120px; right: -80px; }
+  .s2 { width: 300px; height: 300px; background: var(--sky); bottom: 60px; left: -60px; }
+  .s3 { width: 180px; height: 180px; background: var(--grass); top: 200px; right: 300px; }
+  .s4 { width: 120px; height: 120px; background: var(--warm); bottom: 180px; right: 200px; opacity: 0.15; }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-text {}
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,184,0,0.15);
+    color: #A07000;
+    border: 1.5px solid rgba(255,184,0,0.4);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    color: var(--text);
+    margin-bottom: 1.25rem;
+  }
+
+  .hero h1 span {
+    font-family: 'Caveat', cursive;
+    font-weight: 600;
+    font-size: 1.1em;
+    color: var(--warm);
+    display: block;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.75;
+    max-width: 460px;
+    margin-bottom: 2rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 26px;
+    border-radius: 100px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: var(--warm);
+    color: white;
+    box-shadow: 0 4px 20px rgba(255,112,67,0.35);
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,112,67,0.4); }
+
+  .btn-secondary {
+    background: white;
+    color: var(--text);
+    border: 2px solid rgba(0,0,0,0.1);
+  }
+
+  .btn-secondary:hover { background: var(--soft); transform: translateY(-2px); }
+
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-card-stack {
+    position: relative;
+    width: 340px;
+    height: 380px;
+  }
+
+  .hcard {
+    position: absolute;
+    background: white;
+    border-radius: var(--card-r);
+    padding: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  }
+
+  .hcard-main {
+    width: 280px;
+    left: 30px;
+    top: 20px;
+    z-index: 3;
+  }
+
+  .hcard-back1 {
+    width: 260px;
+    left: 50px;
+    top: 5px;
+    z-index: 2;
+    background: #FFF3E0;
+  }
+
+  .hcard-back2 {
+    width: 240px;
+    left: 70px;
+    top: -8px;
+    z-index: 1;
+    background: #E8F5FF;
+  }
+
+  .hcard-emoji { font-size: 2.5rem; margin-bottom: 0.75rem; }
+
+  .hcard-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.4rem; }
+
+  .hcard-sub { font-size: 0.85rem; color: var(--muted); }
+
+  .stat-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .stat-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--soft);
+    border-radius: 12px;
+    padding: 10px 16px;
+    flex: 1;
+    min-width: 70px;
+  }
+
+  .stat-pill .num {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--warm);
+    line-height: 1;
+  }
+
+  .stat-pill .lbl {
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 3px;
+    text-align: center;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 5rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    display: inline-block;
+    background: var(--soft);
+    color: var(--warm);
+    border-radius: 100px;
+    padding: 4px 14px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  h2.section-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .section-lead {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.75;
+    max-width: 580px;
+    margin-bottom: 3rem;
+  }
+
+  /* ABOUT */
+  #pro-nas {
+    background: white;
+    border-radius: var(--section-r);
+    padding: 4rem 3rem;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.05);
+    max-width: 1100px;
+    margin: 0 auto 0;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .about-left h2 { margin-bottom: 1.25rem; }
+
+  .about-text {
+    font-size: 1.02rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .about-right {}
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .tl-item {
+    display: flex;
+    gap: 1rem;
+    position: relative;
+  }
+
+  .tl-item:not(:last-child) .tl-line {
+    position: absolute;
+    left: 19px;
+    top: 38px;
+    width: 2px;
+    height: calc(100% + 0px);
+    background: #F0EBE3;
+    z-index: 0;
+  }
+
+  .tl-dot {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--soft);
+    border: 3px solid var(--sun);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    z-index: 1;
+    position: relative;
+  }
+
+  .tl-content {
+    padding-bottom: 2rem;
+  }
+
+  .tl-year {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--sun);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  .tl-text {
+    font-size: 0.95rem;
+    color: var(--text);
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .tl-sub {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  /* VALUES */
+  #zasady {
+    padding: 5rem 2rem;
+  }
+
+  .values-header { text-align: center; margin-bottom: 3rem; }
+
+  .values-header .section-lead { margin: 0 auto; }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .value-card {
+    background: white;
+    border-radius: var(--card-r);
+    padding: 2rem 1.5rem;
+    border: 2px solid transparent;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .value-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .vc1::before { background: var(--sun); }
+  .vc2::before { background: var(--sky); }
+  .vc3::before { background: var(--grass); }
+  .vc4::before { background: var(--warm); }
+  .vc5::before { background: #C77DFF; }
+  .vc6::before { background: #FF6B9D; }
+
+  .value-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+  }
+
+  .vc-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+
+  .vc-title {
+    font-size: 1rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .vc-text {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* PROGRAM */
+  #programa {
+    background: linear-gradient(135deg, #E8F5FF 0%, #EAF8EA 100%);
+    border-radius: var(--section-r);
+    padding: 4rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .program-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .program-points {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .pp-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: white;
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+
+  .pp-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--sky);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .pp-text { font-size: 0.92rem; color: var(--text); line-height: 1.6; font-weight: 600; }
+
+  .pp-sub { font-size: 0.82rem; color: var(--muted); font-weight: 400; margin-top: 2px; }
+
+  /* STAFF */
+  #kolektyv {
+    padding: 5rem 2rem;
+  }
+
+  .staff-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .staff-card {
+    background: white;
+    border-radius: var(--card-r);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transition: transform 0.2s;
+  }
+
+  .staff-card:hover { transform: translateY(-4px); }
+
+  .staff-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+  }
+
+  .av1 { background: #FFF0E0; }
+  .av2 { background: #E0F5FF; }
+  .av3 { background: #E8FFE8; }
+
+  .staff-name { font-size: 1rem; font-weight: 800; margin-bottom: 0.3rem; }
+
+  .staff-role {
+    font-size: 0.82rem;
+    color: var(--muted);
+    background: var(--soft);
+    border-radius: 100px;
+    padding: 3px 12px;
+    display: inline-block;
+  }
+
+  /* CONTACTS */
+  #kontakty {
+    background: var(--text);
+    border-radius: var(--section-r);
+    padding: 4rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto 3rem;
+    color: white;
+  }
+
+  #kontakty h2 { color: white; }
+
+  #kontakty .section-tag { background: rgba(255,255,255,0.1); color: #FFD166; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .contact-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--card-r);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .cc-icon { font-size: 1.8rem; }
+  .cc-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; }
+  .cc-value { font-size: 1rem; font-weight: 700; color: white; }
+  .cc-value a { color: #7ECFFF; text-decoration: none; }
+  .cc-value a:hover { text-decoration: underline; }
+
+  /* MAP EMBED */
+  .map-wrap {
+    margin-top: 2rem;
+    border-radius: var(--card-r);
+    overflow: hidden;
+    height: 240px;
+    background: rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .map-link {
+    color: #7ECFFF;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  /* FLOATING DECO */
+  .deco {
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.06;
+    font-size: 5rem;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+  }
+
+  .deco { animation: float 6s ease-in-out infinite; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-text > * {
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-text > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-text > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-text > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-text > *:nth-child(4) { animation-delay: 0.4s; }
+
+  .hero-visual { animation: fadeUp 0.8s ease 0.5s both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; }
+    .hero { padding: 2rem 1rem 4rem; min-height: auto; }
+    .hero-content { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    #pro-nas { padding: 2.5rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .values-grid { grid-template-columns: 1fr 1fr; }
+    .program-grid { grid-template-columns: 1fr; }
+    .staff-grid { grid-template-columns: 1fr 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    #programa, #kontakty { padding: 2.5rem 1.5rem; }
+    section { padding: 3rem 1rem; }
+    #zasady { padding: 3rem 1rem; }
+    #kolektyv { padding: 3rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="sun-icon">☀️</div>
+    <span>ЗДО «Малятко»</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#pro-nas">Про нас</a></li>
+    <li><a href="#zasady">Засади</a></li>
+    <li><a href="#programa">Програма</a></li>
+    <li><a href="#kolektyv">Колектив</a></li>
+    <li><a href="#kontakty">Контакти</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-shapes">
+    <div class="shape s1"></div>
+    <div class="shape s2"></div>
+    <div class="shape s3"></div>
+    <div class="shape s4"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">🌟 Дошкільна освіта з 1959 року</div>
+      <h1>Дитячий садок<span>«Малятко»</span></h1>
+      <p class="hero-desc">Місце, де кожна дитина зростає у любові, грі та пізнанні. Дмитрівська сільська рада, Знам'янський район, Кіровоградська область.</p>
+      <div class="hero-cta">
+        <a href="#kontakty" class="btn btn-primary">📞 Зв'язатися з нами</a>
+        <a href="#pro-nas" class="btn btn-secondary">Дізнатись більше</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-stack">
+        <div class="hcard hcard-back2"></div>
+        <div class="hcard hcard-back1"></div>
+        <div class="hcard hcard-main">
+          <div class="hcard-emoji">🎒</div>
+          <div class="hcard-title">Наш садочок сьогодні</div>
+          <div class="hcard-sub">Одна різновікова група загального розвитку</div>
+          <div class="stat-row">
+            <div class="stat-pill">
+              <span class="num">23</span>
+              <span class="lbl">дітей</span>
+            </div>
+            <div class="stat-pill">
+              <span class="num">3</span>
+              <span class="lbl">педагоги</span>
+            </div>
+            <div class="stat-pill">
+              <span class="num">65+</span>
+              <span class="lbl">років</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section style="padding: 4rem 2rem;">
+<div id="pro-nas">
+  <div class="about-grid">
+    <div class="about-left">
+      <div class="section-tag">Про нас</div>
+      <h2 class="section-title">Ми виховуємо<br>щасливих дітей</h2>
+      <p class="about-text">Дошкільний навчальний заклад «Малятко» був побудований та відкрив свої двері першим вихованцям у <strong>1959 році</strong>. Розташований на території Дмитрівської сільської ради і є її комунальною власністю.</p>
+      <p class="about-text">В садочку функціонує одна різновікова група денного перебування загального розвитку. Наші вихованці отримують якісну дошкільну освіту в теплій і домашній атмосфері.</p>
+      <p class="about-text">Пріоритетний напрям — реалізація Базового компонента дошкільної освіти, що визначає вимоги до гармонійного розвитку дитини.</p>
+    </div>
+    <div class="about-right">
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-line"></div>
+          <div class="tl-dot">🏗️</div>
+          <div class="tl-content">
+            <div class="tl-year">1959</div>
+            <div class="tl-text">Заснування садочку</div>
+            <div class="tl-sub">Відкрито двері для перших вихованців</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-line"></div>
+          <div class="tl-dot">📚</div>
+          <div class="tl-content">
+            <div class="tl-year">2012</div>
+            <div class="tl-text">Новий Базовий компонент</div>
+            <div class="tl-sub">Перехід на оновлений Державний стандарт дошкільної освіти</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">🌟</div>
+          <div class="tl-content">
+            <div class="tl-year">Сьогодні</div>
+            <div class="tl-text">23 вихованці, 3 педагоги</div>
+            <div class="tl-sub">Одна різновікова група загального розвитку</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- VALUES -->
+<section id="zasady">
+  <div class="values-header">
+    <div class="section-tag">Наші засади</div>
+    <h2 class="section-title">Правила, за якими працює колектив</h2>
+    <p class="section-lead">Шість принципів, які лежать в основі нашої роботи з кожною дитиною щодня.</p>
+  </div>
+  <div class="values-grid">
+    <div class="value-card vc1">
+      <div class="vc-icon">🤝</div>
+      <div class="vc-title">Повага та інтерес</div>
+      <div class="vc-text">Ставимося до дитини з повагою та інтересом, ураховуючи її можливості та здібності.</div>
+    </div>
+    <div class="value-card vc2">
+      <div class="vc-icon">💡</div>
+      <div class="vc-title">Розкриття потенціалу</div>
+      <div class="vc-text">Активізуємо внутрішні ресурси вихованців, виявляючи інтелектуально‑вольовий і моральний потенціал.</div>
+    </div>
+    <div class="value-card vc3">
+      <div class="vc-icon">❤️</div>
+      <div class="vc-title">Емоційна участь</div>
+      <div class="vc-text">Беремо емоційну участь у стосунках з дитиною, розуміючи її думки, інтереси, почуття, вчинки.</div>
+    </div>
+    <div class="value-card vc4">
+      <div class="vc-icon">🎨</div>
+      <div class="vc-title">Моделювання</div>
+      <div class="vc-text">Моделюємо стилі спілкування, форми, способи діяльності — показуємо приклад власними діями.</div>
+    </div>
+    <div class="value-card vc5">
+      <div class="vc-icon">🌱</div>
+      <div class="vc-title">Природовідповідність</div>
+      <div class="vc-text">Враховуємо принцип природовідповідності — навчання у ритмі природнього розвитку кожної дитини.</div>
+    </div>
+    <div class="value-card vc6">
+      <div class="vc-icon">🌈</div>
+      <div class="vc-title">Дитина — однодумець</div>
+      <div class="vc-text">Вбачаємо у дітях однодумців — і тоді досягаємо справжнього професійного успіху.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section style="padding: 0 2rem 5rem;">
+<div id="programa">
+  <div class="program-grid">
+    <div>
+      <div class="section-tag">Програма</div>
+      <h2 class="section-title" style="color: #1a3a5c;">Освіта, що розвиває</h2>
+      <p style="color: #4a6785; font-size: 1rem; line-height: 1.75; margin-bottom: 2rem;">Реалізуємо нову редакцію Базового компонента дошкільної освіти — Державного стандарту, схваленого Міністерством освіти.</p>
+      <div class="program-points">
+        <div class="pp-item">
+          <div class="pp-num">1</div>
+          <div>
+            <div class="pp-text">Любов до України та рідної мови</div>
+            <div class="pp-sub">Виховання поваги до народних традицій, звичаїв та національних цінностей</div>
+          </div>
+        </div>
+        <div class="pp-item">
+          <div class="pp-num">2</div>
+          <div>
+            <div class="pp-text">Шанобливе ставлення до родини</div>
+            <div class="pp-sub">Формування міцних сімейних цінностей та поваги до близьких</div>
+          </div>
+        </div>
+        <div class="pp-item">
+          <div class="pp-num">3</div>
+          <div>
+            <div class="pp-text">Свідоме ставлення до довкілля</div>
+            <div class="pp-sub">Виховання екологічної свідомості та любові до природи</div>
+          </div>
+        </div>
+        <div class="pp-item">
+          <div class="pp-num">4</div>
+          <div>
+            <div class="pp-text">Повага до інших культур</div>
+            <div class="pp-sub">Відкритість та повага до цінностей інших народів і традицій</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex; align-items:center; justify-content:center;">
+      <div style="background:white; border-radius: var(--card-r); padding: 2rem; text-align:center; box-shadow: 0 4px 24px rgba(0,0,0,0.08); max-width: 260px;">
+        <div style="font-size: 4rem; margin-bottom: 1rem;">🎓</div>
+        <div style="font-size: 1.1rem; font-weight: 800; margin-bottom: 0.5rem;">Базовий компонент</div>
+        <div style="font-size: 0.85rem; color: var(--muted); line-height: 1.6;">Державний стандарт дошкільної освіти України</div>
+        <div style="margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid #f0f0f0;">
+          <div style="font-size: 0.78rem; color: var(--muted);">Затверджено</div>
+          <div style="font-size: 1rem; font-weight: 700; color: var(--sky);">2012 рік</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- STAFF -->
+<section id="kolektyv">
+  <div class="section-tag">Колектив</div>
+  <h2 class="section-title">Наші педагоги</h2>
+  <p class="section-lead">Маленький та дружний колектив, де кожен підходить до роботи з душею і любов'ю до дітей.</p>
+  <div class="staff-grid">
+    <div class="staff-card">
+      <div class="staff-avatar av1">👩‍🏫</div>
+      <div class="staff-name">Вихователь</div>
+      <div class="staff-role">Педагогічний склад</div>
+    </div>
+    <div class="staff-card">
+      <div class="staff-avatar av2">👩‍🍳</div>
+      <div class="staff-name">Помічник вихователя</div>
+      <div class="staff-role">Молодший педагог</div>
+    </div>
+    <div class="staff-card">
+      <div class="staff-avatar av3">👩‍💼</div>
+      <div class="staff-name">Завідуюча</div>
+      <div class="staff-role">Керівництво</div>
+    </div>
+  </div>
+  <p style="margin-top: 1.5rem; color: var(--muted); font-size: 0.9rem; text-align:center;">Колектив: 3 особи. Для уточнення інформації звертайтесь за телефоном.</p>
+</section>
+
+<!-- CONTACTS -->
+<section style="padding: 0 2rem 5rem;">
+<div id="kontakty">
+  <div class="section-tag">Контакти</div>
+  <h2 class="section-title">Зв'яжіться з нами</h2>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="cc-icon">📍</div>
+      <div class="cc-label">Адреса</div>
+      <div class="cc-value">Кіровоградська обл., Знам'янський р-н, с. Дмитрівка, вул. Шкільна, 12</div>
+    </div>
+    <div class="contact-card">
+      <div class="cc-icon">📞</div>
+      <div class="cc-label">Телефон</div>
+      <div class="cc-value"><a href="tel:+380994475916">+38 099 447 59 16</a></div>
+    </div>
+    <div class="contact-card">
+      <div class="cc-icon">📧</div>
+      <div class="cc-label">Електронна пошта</div>
+      <div class="cc-value"><a href="mailto:vika.vitaD@ukr.net">vika.vitaD@ukr.net</a></div>
+    </div>
+  </div>
+  <div class="contact-grid" style="grid-template-columns: 1fr 1fr; margin-top: 1.25rem;">
+    <div class="contact-card">
+      <div class="cc-icon">🏫</div>
+      <div class="cc-label">Повна назва</div>
+      <div class="cc-value" style="font-size:0.88rem; font-weight:500; line-height:1.5;">Дмитрівський заклад дошкільної освіти «Малятко» Дмитрівської сільської ради Знам'янського району Кіровоградської області</div>
+    </div>
+    <div class="contact-card">
+      <div class="cc-icon">🏛️</div>
+      <div class="cc-label">Офіційна інформація</div>
+      <div class="cc-value" style="font-size:0.9rem; line-height:1.7;">
+        ЄДРПОУ: 24509801<br>
+        Індекс: 27422<br>
+        Форма власності: комунальна
+      </div>
+    </div>
+  </div>
+  <div class="map-wrap">
+    <a class="map-link" href="https://maps.google.com/?q=с.Дмитрівка,вул.Шкільна+12,Знам'янський+район,Кіровоградська+область" target="_blank">
+      🗺️ Відкрити на Google Maps
+    </a>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2024 ЗДО «Малятко» · с. Дмитрівка · Кіровоградська область</p>
+  <p style="margin-top:6px;">З любов'ю до кожної дитини ❤️</p>
+</footer>
+
+</body>
+</html>
