@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="12" fill="#F5F0FF"/>
+  <g transform="translate(32, 34)">
+    <!-- hair -->
+    <ellipse cx="-6" cy="-26" rx="4" ry="5" fill="#7C5FDB" transform="rotate(-15,-6,-26)"/>
+    <ellipse cx="0" cy="-28" rx="4" ry="5" fill="#7C5FDB"/>
+    <ellipse cx="6" cy="-26" rx="4" ry="5" fill="#7C5FDB" transform="rotate(15,6,-26)"/>
+    <!-- head -->
+    <circle cx="0" cy="-16" r="13" fill="#9B8FEF"/>
+    <!-- eyes -->
+    <circle cx="-4.5" cy="-19" r="2.5" fill="#fff"/>
+    <circle cx="4.5" cy="-19" r="2.5" fill="#fff"/>
+    <circle cx="-4.5" cy="-19" r="1.2" fill="#5B4ACA"/>
+    <circle cx="4.5" cy="-19" r="1.2" fill="#5B4ACA"/>
+    <!-- cheeks -->
+    <circle cx="-8" cy="-14" r="3" fill="#C4B8F8" opacity="0.6"/>
+    <circle cx="8" cy="-14" r="3" fill="#C4B8F8" opacity="0.6"/>
+    <!-- smile -->
+    <path d="M-4 -11 Q0 -7 4 -11" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- body -->
+    <rect x="-11" y="-3" width="22" height="20" rx="6" fill="#C4B8F8"/>
+    <!-- arms -->
+    <path d="M-11 2 Q-22 -2 -24 -12" fill="none" stroke="#9B8FEF" stroke-width="4.5" stroke-linecap="round"/>
+    <circle cx="-24" cy="-12" r="3" fill="#9B8FEF"/>
+    <path d="M11 2 Q22 -2 24 -12" fill="none" stroke="#9B8FEF" stroke-width="4.5" stroke-linecap="round"/>
+    <circle cx="24" cy="-12" r="3" fill="#9B8FEF"/>
+    <!-- legs -->
+    <path d="M-5 17 Q-6 24 -7 29" fill="none" stroke="#9B8FEF" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M5 17 Q6 24 7 29" fill="none" stroke="#9B8FEF" stroke-width="4.5" stroke-linecap="round"/>
+    <ellipse cx="-8" cy="30" rx="5" ry="3" fill="#7C5FDB"/>
+    <ellipse cx="8" cy="30" rx="5" ry="3" fill="#7C5FDB"/>
+  </g>
+</svg>
