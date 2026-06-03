@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="12" fill="#F0F7FF"/>
+  <g transform="translate(32, 32)">
+    <!-- petals -->
+    <ellipse cx="0" cy="-17" rx="5.5" ry="10" fill="#FF8FAB" opacity="0.9"/>
+    <ellipse cx="0" cy="-17" rx="5.5" ry="10" fill="#FF8FAB" opacity="0.9" transform="rotate(51.4)"/>
+    <ellipse cx="0" cy="-17" rx="5.5" ry="10" fill="#FFB347" opacity="0.9" transform="rotate(102.8)"/>
+    <ellipse cx="0" cy="-17" rx="5.5" ry="10" fill="#FFB347" opacity="0.9" transform="rotate(154.2)"/>
+    <ellipse cx="0" cy="-17" rx="5.5" ry="10" fill="#FF8FAB" opacity="0.9" transform="rotate(205.7)"/>
+    <ellipse cx="0" cy="-17" rx="5.5" ry="10" fill="#FFB347" opacity="0.9" transform="rotate(257.1)"/>
+    <ellipse cx="0" cy="-17" rx="5.5" ry="10" fill="#FF8FAB" opacity="0.9" transform="rotate(308.5)"/>
+    <!-- center -->
+    <circle cx="0" cy="0" r="12" fill="#FFE066"/>
+    <circle cx="0" cy="0" r="10" fill="#FFD700"/>
+    <!-- face -->
+    <circle cx="-3.5" cy="-3" r="2" fill="#fff"/>
+    <circle cx="3.5" cy="-3" r="2" fill="#fff"/>
+    <circle cx="-3.5" cy="-3" r="1" fill="#c97d00"/>
+    <circle cx="3.5" cy="-3" r="1" fill="#c97d00"/>
+    <circle cx="-6" cy="1" r="2.5" fill="#FF8FAB" opacity="0.4"/>
+    <circle cx="6" cy="1" r="2.5" fill="#FF8FAB" opacity="0.4"/>
+    <path d="M-3.5 1 Q0 5 3.5 1" fill="none" stroke="#c97d00" stroke-width="1.2" stroke-linecap="round"/>
+  </g>
+  <!-- stars -->
+  <text x="6" y="16" font-family="sans-serif" font-size="9" fill="#FFE066">★</text>
+  <text x="50" y="13" font-family="sans-serif" font-size="7" fill="#5B9CF6">★</text>
+</svg>
