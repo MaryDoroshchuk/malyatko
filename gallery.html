@@ -48,11 +48,7 @@
     gap: 10px;
     text-decoration: none;
     color: var(--text);
-  }
-  .nav-logo span {
-    font-size: 1.15rem;
-    font-weight: 800;
-    letter-spacing: -0.3px;
+    min-width: 120px;
   }
   .nav-links {
     display: flex;
@@ -68,10 +64,8 @@
     border-radius: 100px;
     transition: all 0.2s;
   }
-  .nav-links a:hover, .nav-links a.active {
-    color: var(--text);
-    background: var(--soft);
-  }
+  .nav-links a:hover { color: var(--text); background: var(--soft); }
+  .nav-links a.active { color: var(--warm); font-weight: 800; }
 
   /* PAGE HEADER */
   .page-header {
@@ -79,7 +73,7 @@
     padding: 4rem 2rem 3rem;
     text-align: center;
   }
-  .page-header .section-tag {
+  .section-tag {
     display: inline-block;
     background: var(--soft);
     color: var(--warm);
@@ -105,7 +99,7 @@
     line-height: 1.7;
   }
 
-  /* MAIN CONTENT */
+  /* GALLERY WRAP */
   .gallery-wrap {
     max-width: 900px;
     margin: 0 auto;
@@ -120,17 +114,9 @@
     box-shadow: 0 4px 32px rgba(0,0,0,0.07);
     margin-bottom: 3rem;
   }
-
-  /* EVENT HEADER */
   .event-header {
     padding: 2rem 2.5rem 1.5rem;
     border-bottom: 1px solid #F5EEE6;
-  }
-  .event-meta {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 0.75rem;
   }
   .event-date {
     display: inline-flex;
@@ -142,6 +128,7 @@
     padding: 4px 14px;
     font-size: 0.82rem;
     font-weight: 700;
+    margin-bottom: 0.75rem;
   }
   .event-title {
     font-size: 1.4rem;
@@ -156,54 +143,177 @@
     line-height: 1.8;
   }
 
-  /* PHOTO GRID — одне велике + 3 менших */
-  .photo-grid {
-    display: grid;
-    grid-template-columns: 1.6fr 1fr;
-    grid-template-rows: 240px 240px;
-    gap: 4px;
+  /* SLIDER */
+  .slider-wrap {
+    position: relative;
+    background: #f8f4ef;
   }
-  .photo-main {
-    grid-row: 1 / 3;
+  .slider-track-outer {
     overflow: hidden;
   }
-  .photo-main img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+  .slider-track {
+    display: flex;
     transition: transform 0.4s ease;
   }
-  .photo-main:hover img { transform: scale(1.04); }
-
-  .photo-small {
-    overflow: hidden;
+  .slide {
+    min-width: 100%;
+    height: 480px;
+    cursor: pointer;
     position: relative;
   }
-  .photo-small img {
+  .slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.4s ease;
   }
-  .photo-small:hover img { transform: scale(1.06); }
+  .slide-hint {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    background: rgba(0,0,0,0.45);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 100px;
+    pointer-events: none;
+  }
 
-  /* PLACEHOLDER для фото без зображення */
-  .photo-placeholder {
-    width: 100%;
-    height: 100%;
-    background: #F5EEE6;
+  /* SLIDER BUTTONS */
+  .slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.92);
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    color: var(--muted);
-    font-size: 0.8rem;
-    font-weight: 600;
+    transition: all 0.2s;
   }
-  .photo-placeholder span { font-size: 2rem; }
+  .slider-btn:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+  .slider-btn.prev { left: 14px; }
+  .slider-btn.next { right: 14px; }
+
+  /* DOTS */
+  .slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    padding: 14px 0;
+    background: #f8f4ef;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ddd;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 0;
+  }
+  .dot.active { background: var(--warm); transform: scale(1.25); }
+
+  /* THUMBNAILS */
+  .slider-thumbs {
+    display: flex;
+    gap: 6px;
+    padding: 10px 14px 14px;
+    overflow-x: auto;
+    background: #f8f4ef;
+    scrollbar-width: none;
+  }
+  .slider-thumbs::-webkit-scrollbar { display: none; }
+  .thumb {
+    width: 64px;
+    height: 48px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    flex-shrink: 0;
+    border: 2.5px solid transparent;
+    transition: all 0.2s;
+    opacity: 0.6;
+  }
+  .thumb.active { border-color: var(--warm); opacity: 1; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* LIGHTBOX */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox-img {
+    max-width: 92vw;
+    max-height: 88vh;
+    border-radius: 12px;
+    object-fit: contain;
+    display: block;
+  }
+  .lightbox-close {
+    position: fixed;
+    top: 18px;
+    right: 22px;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,0.28); }
+  .lightbox-btn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    font-size: 1.4rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .lightbox-btn:hover { background: rgba(255,255,255,0.28); }
+  .lightbox-prev { left: 16px; }
+  .lightbox-next { right: 16px; }
+  .lightbox-counter {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.7);
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: 'Nunito', sans-serif;
+  }
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
@@ -213,11 +323,8 @@
     .gallery-wrap { padding: 2rem 1rem 3rem; }
     .event-header { padding: 1.5rem 1.5rem 1.25rem; }
     .event-title { font-size: 1.2rem; }
-    .photo-grid {
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 160px 160px;
-    }
-    .photo-main { grid-row: 1 / 2; grid-column: 1 / 3; }
+    .slide { height: 280px; }
+    .slider-btn { width: 36px; height: 36px; font-size: 1rem; }
   }
 </style>
 </head>
@@ -225,9 +332,9 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="index.html" style="min-width: 120px;">
+  <a class="nav-logo" href="index.html" style="min-width:120px;">
     <img src="images/logo-header-v2.svg" alt="Малятко" style="height:44px; width:auto;">
-</a>
+  </a>
   <ul class="nav-links">
     <li><a href="index.html#pro-nas">Про нас</a></li>
     <li><a href="index.html#zasady">Засади</a></li>
@@ -248,96 +355,109 @@
 <!-- EVENTS -->
 <div class="gallery-wrap">
 
-  <!-- ======= ПОДІЯ 1 — ВИШИВАНКА ======= -->
-  <!-- Щоб додати нову подію — скопіюй весь блок від "event-card" до "/event-card" і заміни дані -->
+  <!-- ======= ПОДІЯ 1 — ВИШИВАНКА =======
+       Щоб додати нову подію — скопіюй весь блок event-card і заміни дані та фото -->
   <div class="event-card">
     <div class="event-header">
-      <div class="event-meta">
-        <div class="event-date">📅 16 травня 2026</div>
-      </div>
+      <div class="event-date">📅 16 травня 2026</div>
       <div class="event-title">День вишиванки 🌻</div>
       <div class="event-desc">
-        З Днем вишиванки!
-       Українська вишиванка є символом єдності, сили та любові до рідної землі.
-       Наші діти — це майбутнє України, яке береже традиції, шанує історію та з гордістю несе українську культуру у світ 💙💛
+        У День вишиванки колектив Дмитрівської сільської ради та її структурних підрозділів об'єднався у любові до українських традицій, культури й нашої незламної України.<br><br>
+        Вишиванка — це символ єдності, сили та гордості за свій народ. 💙💛
       </div>
     </div>
 
-    <div class="photo-grid">
-      <!-- ВЕЛИКЕ ФОТО — заміни src на своє посилання з Cloudinary -->
-      <div class="photo-main">
-        <img src="https://res.cloudinary.com/dq5pc8n2a/image/upload/v1780572597/85CC98E2-AE66-4B73-9F61-249F92412076_1_201_a_dtmbii.jpg" alt="День вишиванки 2026">
-        <!-- Якщо фото ще немає — видали рядок вище і встав замість нього: -->
-        <!-- <div class="photo-placeholder"><span>🌻</span>Фото 1</div> -->
+    <!-- СЛАЙДЕР — просто додавай або прибирай <div class="slide"> блоки -->
+    <div class="slider-wrap" data-slider>
+      <div class="slider-track-outer">
+        <div class="slider-track">
+
+          <!-- ФОТО 1 — заміни src на своє посилання з Cloudinary -->
+          <div class="slide" data-index="0">
+            <img src="ПОСИЛАННЯ_З_CLOUDINARY_ФОТО_1" alt="День вишиванки 2026">
+            <div class="slide-hint">🔍 Клікни для збільшення</div>
+          </div>
+          <!-- ФОТО 2 -->
+          <div class="slide" data-index="1">
+            <img src="ПОСИЛАННЯ_З_CLOUDINARY_ФОТО_2" alt="День вишиванки 2026">
+          </div>
+          <!-- ФОТО 3 -->
+          <div class="slide" data-index="2">
+            <img src="ПОСИЛАННЯ_З_CLOUDINARY_ФОТО_3" alt="День вишиванки 2026">
+          </div>
+          <!-- ФОТО 4 -->
+          <div class="slide" data-index="3">
+            <img src="ПОСИЛАННЯ_З_CLOUDINARY_ФОТО_4" alt="День вишиванки 2026">
+          </div>
+          <!-- ФОТО 5 -->
+          <div class="slide" data-index="4">
+            <img src="ПОСИЛАННЯ_З_CLOUDINARY_ФОТО_5" alt="День вишиванки 2026">
+          </div>
+          <!-- ФОТО 6 -->
+          <div class="slide" data-index="5">
+            <img src="ПОСИЛАННЯ_З_CLOUDINARY_ФОТО_6" alt="День вишиванки 2026">
+          </div>
+          <!-- ФОТО 7 -->
+          <div class="slide" data-index="6">
+            <img src="ПОСИЛАННЯ_З_CLOUDINARY_ФОТО_7" alt="День вишиванки 2026">
+          </div>
+          <!-- ФОТО 8 -->
+          <div class="slide" data-index="7">
+            <img src="ПОСИЛАННЯ_З_CLOUDINARY_ФОТО_8" alt="День вишиванки 2026">
+          </div>
+
+        </div>
       </div>
 
-      <!-- МАЛЕНЬКЕ ФОТО 2 -->
-      <div class="photo-small">
-        <img src="https://res.cloudinary.com/dq5pc8n2a/image/upload/v1780573893/1B790FD7-8C76-41A1-8F19-CD7164283C2D_1_201_a_v7emb4.jpg" alt="День вишиванки 2026">
-     </div>
+      <button class="slider-btn prev">&#8249;</button>
+      <button class="slider-btn next">&#8250;</button>
 
-      <!-- МАЛЕНЬКЕ ФОТО 3 -->
-      <div class="photo-small">
-        <img src="https://res.cloudinary.com/dq5pc8n2a/image/upload/v1780573893/7B743CD6-D344-4C4C-8988-095EB5739EE7_1_201_a_a6meh4.jpg" alt="День вишиванки 2026">
-      </div>
-     
-     <!-- МАЛЕНЬКЕ ФОТО 4 -->
-      <div class="photo-small">
-        <img src="https://res.cloudinary.com/dq5pc8n2a/image/upload/v1780573892/FF150B7D-C7EE-4C4E-94D2-36138B01FAA2_1_201_a_svy9cn.jpg" alt="День вишиванки 2026">
-     </div>
+      <div class="slider-dots"></div>
 
-     <!-- МАЛЕНЬКЕ ФОТО 5 -->
-      <div class="photo-small">
-        <img src="https://res.cloudinary.com/dq5pc8n2a/image/upload/v1780572597/4470E65E-84D5-4022-A81D-1233396E6FB6_1_201_a_wny9mt.jpg" alt="День вишиванки 2026">
-     </div>
-
-     <!-- МАЛЕНЬКЕ ФОТО 6 -->
-      <div class="photo-small">
-        <img src="https://res.cloudinary.com/dq5pc8n2a/image/upload/v1780573892/46C5DA2E-EB73-4DB3-9E0A-9562D5DBEDAB_1_201_a_tqyco6.jpg" alt="День вишиванки 2026">
-     </div>
-
-     <!-- МАЛЕНЬКЕ ФОТО 7 -->
-      <div class="photo-small">
-        <img src="https://res.cloudinary.com/dq5pc8n2a/image/upload/v1780572597/DE701249-23A3-4427-BF95-6DEC2286F02E_1_201_a_bch3eo.jpg" alt="День вишиванки 2026">
-     </div>
-     
-     <!-- МАЛЕНЬКЕ ФОТО 8 -->
-      <div class="photo-small">
-        <img src="https://res.cloudinary.com/dq5pc8n2a/image/upload/v1780573891/E058B68C-3014-460D-9EE3-7AEAAD2C2D6E_1_201_a_fp5rse.jpg" alt="День вишиванки 2026">
-     </div>
+      <div class="slider-thumbs"></div>
     </div>
   </div>
   <!-- ======= КІНЕЦЬ ПОДІЇ 1 ======= -->
 
 
-  <!-- ======= ЯК ДОДАТИ НОВУ ПОДІЮ =======
-  Скопіюй блок нижче і встав перед рядком "КІНЕЦЬ ПОДІЇ 1" або після нього:
+  <!-- ======= ШАБЛОН ДЛЯ НОВОЇ ПОДІЇ (розкоментуй і заповни) =======
 
   <div class="event-card">
     <div class="event-header">
-      <div class="event-meta">
-        <div class="event-date">📅 ДАТА</div>
-      </div>
+      <div class="event-date">📅 ДАТА</div>
       <div class="event-title">НАЗВА ПОДІЇ</div>
       <div class="event-desc">ОПИС ПОДІЇ</div>
     </div>
-    <div class="photo-grid">
-      <div class="photo-main">
-        <img src="ПОСИЛАННЯ_З_CLOUDINARY" alt="НАЗВА">
+    <div class="slider-wrap" data-slider>
+      <div class="slider-track-outer">
+        <div class="slider-track">
+          <div class="slide" data-index="0">
+            <img src="ПОСИЛАННЯ_З_CLOUDINARY" alt="НАЗВА">
+            <div class="slide-hint">🔍 Клікни для збільшення</div>
+          </div>
+          <div class="slide" data-index="1">
+            <img src="ПОСИЛАННЯ_З_CLOUDINARY" alt="НАЗВА">
+          </div>
+        </div>
       </div>
-      <div class="photo-small">
-        <img src="ПОСИЛАННЯ_З_CLOUDINARY" alt="НАЗВА">
-      </div>
-      <div class="photo-small">
-        <img src="ПОСИЛАННЯ_З_CLOUDINARY" alt="НАЗВА">
-      </div>
-      <div class="photo-small">
-        <img src="ПОСИЛАННЯ_З_CLOUDINARY" alt="НАЗВА">
-      </div>
+      <button class="slider-btn prev">&#8249;</button>
+      <button class="slider-btn next">&#8250;</button>
+      <div class="slider-dots"></div>
+      <div class="slider-thumbs"></div>
     </div>
   </div>
+
   ======= КІНЕЦЬ ШАБЛОНУ ======= -->
 
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lb-close">✕</button>
+  <button class="lightbox-btn lightbox-prev" id="lb-prev">&#8249;</button>
+  <img class="lightbox-img" id="lb-img" src="" alt="">
+  <button class="lightbox-btn lightbox-next" id="lb-next">&#8250;</button>
+  <div class="lightbox-counter" id="lb-counter"></div>
 </div>
 
 <!-- FOOTER -->
@@ -345,6 +465,112 @@
   <p>© 2026 ЗДО «Малятко» · Дмитрівка · Кіровоградська область</p>
   <p style="margin-top:6px;">З любов'ю до кожної дитини ❤️</p>
 </footer>
+
+<script>
+  document.querySelectorAll('[data-slider]').forEach(function(sliderWrap) {
+    const track = sliderWrap.querySelector('.slider-track');
+    const slides = sliderWrap.querySelectorAll('.slide');
+    const dotsWrap = sliderWrap.querySelector('.slider-dots');
+    const thumbsWrap = sliderWrap.querySelector('.slider-thumbs');
+    const total = slides.length;
+    let current = 0;
+
+    // Створюємо dots і thumbnails
+    slides.forEach(function(slide, i) {
+      const dot = document.createElement('button');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', function() { goTo(i); });
+      dotsWrap.appendChild(dot);
+
+      const thumb = document.createElement('div');
+      thumb.className = 'thumb' + (i === 0 ? ' active' : '');
+      const img = slide.querySelector('img');
+      if (img) {
+        const tImg = document.createElement('img');
+        tImg.src = img.src;
+        tImg.alt = img.alt;
+        thumb.appendChild(tImg);
+      }
+      thumb.addEventListener('click', function() { goTo(i); });
+      thumbsWrap.appendChild(thumb);
+    });
+
+    function goTo(index) {
+      current = (index + total) % total;
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      sliderWrap.querySelectorAll('.dot').forEach(function(d, i) {
+        d.classList.toggle('active', i === current);
+      });
+      sliderWrap.querySelectorAll('.thumb').forEach(function(t, i) {
+        t.classList.toggle('active', i === current);
+      });
+    }
+
+    sliderWrap.querySelector('.prev').addEventListener('click', function() { goTo(current - 1); });
+    sliderWrap.querySelector('.next').addEventListener('click', function() { goTo(current + 1); });
+
+    // Свайп на мобільному
+    let startX = 0;
+    track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; });
+    track.addEventListener('touchend', function(e) {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) { goTo(diff > 0 ? current + 1 : current - 1); }
+    });
+
+    // Клік на слайд → lightbox
+    slides.forEach(function(slide, i) {
+      slide.addEventListener('click', function() { openLightbox(sliderWrap, i); });
+    });
+  });
+
+  // LIGHTBOX
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  const lbCounter = document.getElementById('lb-counter');
+  let lbImages = [];
+  let lbCurrent = 0;
+
+  function openLightbox(sliderWrap, index) {
+    lbImages = Array.from(sliderWrap.querySelectorAll('.slide img')).map(function(img) {
+      return { src: img.src, alt: img.alt };
+    });
+    lbCurrent = index;
+    updateLightbox();
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function updateLightbox() {
+    lbImg.src = lbImages[lbCurrent].src;
+    lbImg.alt = lbImages[lbCurrent].alt;
+    lbCounter.textContent = (lbCurrent + 1) + ' / ' + lbImages.length;
+  }
+
+  document.getElementById('lb-close').addEventListener('click', function() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+  document.getElementById('lb-prev').addEventListener('click', function() {
+    lbCurrent = (lbCurrent - 1 + lbImages.length) % lbImages.length;
+    updateLightbox();
+  });
+  document.getElementById('lb-next').addEventListener('click', function() {
+    lbCurrent = (lbCurrent + 1) % lbImages.length;
+    updateLightbox();
+  });
+  lightbox.addEventListener('click', function(e) {
+    if (e.target === lightbox) {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+  document.addEventListener('keydown', function(e) {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'ArrowLeft') { lbCurrent = (lbCurrent - 1 + lbImages.length) % lbImages.length; updateLightbox(); }
+    if (e.key === 'ArrowRight') { lbCurrent = (lbCurrent + 1) % lbImages.length; updateLightbox(); }
+    if (e.key === 'Escape') { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
+  });
+</script>
 
 </body>
 </html>
