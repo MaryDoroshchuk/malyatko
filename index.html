@@ -518,7 +518,7 @@
     border-radius: var(--section-r);
     padding: 4rem 3rem;
     max-width: 1100px;
-    margin: 0 auto 3rem;
+    margin: 0 auto 1rem;
     color: white;
   }
   #kontakty h2 { color: white; }
@@ -1133,12 +1133,13 @@
   // ініціалізація поля телефону з прапорцями
   const phoneInputField = document.querySelector("#phone");
   const iti = window.intlTelInput(phoneInputField, {
-    initialCountry: "ua",
-    preferredCountries: ["ua", "pl", "de", "cz"],
-    separateDialCode: true,
-    autoPlaceholder: "off",
-    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.19/build/js/utils.js"
-  });
+  initialCountry: "ua",
+  preferredCountries: ["ua", "pl", "de", "cz"],
+  separateDialCode: true,
+  autoPlaceholder: "off",
+  dropdownContainer: document.body,
+  utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.19/build/js/utils.js"
+});
 
   document.getElementById('apply-form').addEventListener('submit', function (e) {
     e.preventDefault();
