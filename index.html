@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ЗДО "Малятко" — Дмитрівка</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.min.css">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -593,6 +594,21 @@
   height: 1px;
   opacity: 0;
 }
+ .iti { width: 100%; }
+.apply-form .iti input {
+  width: 100%;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  padding: 14px 16px 14px 90px;
+  border: 2px solid rgba(0,0,0,0.08);
+  border-radius: var(--card-r);
+  background: var(--cream);
+  color: var(--text);
+}
+.apply-form .iti input:focus {
+  outline: none;
+  border-color: var(--sun);
+}
 
  /* ZAYAVKA popup  */
 .popup-overlay {
@@ -1020,8 +1036,7 @@
   <span class="error-msg" id="name-error"></span>
 
   <label>Номер телефону*</label>
-  <input type="tel" name="phone" id="phone" required
-    placeholder="+380XXXXXXXXX або 0XXXXXXXXX">
+  <input type="tel" name="phone" id="phone" required>
   <span class="error-msg" id="phone-error"></span>
 
   <label>Повідомлення</label>
@@ -1113,6 +1128,15 @@
 </script>
 
  <script>
+  // ініціалізація поля телефону з прапорцями
+  const phoneInputField = document.querySelector("#phone");
+  const iti = window.intlTelInput(phoneInputField, {
+    initialCountry: "ua",
+    preferredCountries: ["ua", "pl", "de", "cz"],
+    separateDialCode: true,
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/utils.js"
+  });
+
   document.getElementById('apply-form').addEventListener('submit', function (e) {
     e.preventDefault();
     const form = e.target;
@@ -1123,7 +1147,6 @@
     const nameError = document.getElementById('name-error');
     const phoneError = document.getElementById('phone-error');
 
-    // скидаємо попередні помилки
     [name, phone].forEach(f => f.classList.remove('invalid'));
     [nameError, phoneError].forEach(e => e.classList.remove('show'));
 
@@ -1135,10 +1158,9 @@
       valid = false;
     }
 
-    // перевірка телефону: +380XXXXXXXXX або 0XXXXXXXXX
-    const phoneClean = phone.value.replace(/[\s()-]/g, '');
-    if (!/^(\+380\d{9}|0\d{9})$/.test(phoneClean)) {
-      phoneError.textContent = "Формат: +380XXXXXXXXX або 0XXXXXXXXX";
+    // перевірка телефону через бібліотеку
+    if (!iti.isValidNumber()) {
+      phoneError.textContent = "Введіть коректний номер телефону";
       phoneError.classList.add('show');
       phone.classList.add('invalid');
       valid = false;
@@ -1146,8 +1168,9 @@
 
     if (!valid) return;
 
-    // надсилання
     const data = new FormData(form);
+    data.set('phone', iti.getNumber()); // повний номер з кодом країни, напр. +380501234567
+
     fetch(form.action, {
       method: 'POST',
       body: data,
@@ -1156,6 +1179,7 @@
     .then(response => {
       if (response.ok) {
         form.reset();
+        iti.setCountry("ua");
         document.getElementById('success-popup').style.display = 'flex';
       } else {
         alert('Сталася помилка. Спробуйте ще раз.');
@@ -1166,5 +1190,7 @@
     });
   });
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/intlTelInput.min.js"></script>
 </body>
 </html>
