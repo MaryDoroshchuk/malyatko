@@ -92,7 +92,7 @@
     display: flex;
     align-items: center;
     overflow: hidden;
-    padding: 3rem 2rem 6rem;
+    padding: 3rem 2rem 2rem;
   }
   .hero-bg {
     position: absolute;
@@ -266,7 +266,7 @@
   }
   /* SECTIONS */
   section {
-    padding: 5rem 2rem;
+    padding: 3rem 2rem;
     max-width: 1100px;
     margin: 0 auto;
   }
@@ -376,7 +376,7 @@
   }
   /* VALUES */
   #zasady {
-    padding: 5rem 2rem;
+    padding: 3rem 2rem;
   }
   .values-header { text-align: center; margin-bottom: 3rem; }
   .values-header .section-lead { margin: 0 auto; }
@@ -468,7 +468,7 @@
   .pp-sub { font-size: 0.82rem; color: var(--muted); font-weight: 400; margin-top: 2px; }
   /* STAFF */
   #kolektyv {
-    padding: 5rem 2rem;
+    padding: 3rem 2rem;
   }
   .staff-grid {
     display: grid;
@@ -923,7 +923,7 @@
   </div>
 </section>
 <!-- PROGRAM -->
-<section style="padding: 0 2rem 5rem;">
+<section style="padding: 0 2rem 2rem;">
 <div id="programa">
   <div class="program-grid">
     <div>
@@ -1032,7 +1032,7 @@
    <form class="apply-form" id="apply-form" action="https://formspree.io/f/mnjygkjp" method="POST">
   <label>Ваше ім'я та прізвище*</label>
   <input type="text" name="name" id="name" required minlength="3"
-    pattern="[А-Яа-яІіЇїЄєҐґA-Za-zʼ'\s-]+"
+    pattern="[А-Яа-яІіЇїЄєҐґA-Za-zʼ'\s\-]+"
     title="Введіть ім'я та прізвище (тільки букви, мінімум 3 символи)">
   <span class="error-msg" id="name-error"></span>
 
@@ -1154,7 +1154,7 @@
     [nameError, phoneError].forEach(e => e.classList.remove('show'));
 
     // перевірка імені
-    if (name.value.trim().length < 3 || !/^[А-Яа-яІіЇїЄєҐґA-Za-zʼ'\s-]+$/.test(name.value.trim())) {
+    if (name.value.trim().length < 3 || !/^[А-Яа-яІіЇїЄєҐґA-Za-zʼ'\s\-]+$/.test(name.value.trim())) {
       nameError.textContent = "Введіть ім'я та прізвище (тільки букви, мінімум 3 символи)";
       nameError.classList.add('show');
       name.classList.add('invalid');
