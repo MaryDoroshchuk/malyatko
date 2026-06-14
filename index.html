@@ -594,7 +594,8 @@
   height: 1px;
   opacity: 0;
 }
- .iti { width: 100%; }
+ .iti { width: 100%; border-radius: var(--card-r);
+  overflow: hidden; }
 .apply-form .iti input {
   width: 100%;
   font-family: 'Nunito', sans-serif;
@@ -1135,6 +1136,7 @@
     initialCountry: "ua",
     preferredCountries: ["ua", "pl", "de", "cz"],
     separateDialCode: true,
+    autoPlaceholder: "off"
     utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@17.0.19/build/js/utils.js"
   });
 
